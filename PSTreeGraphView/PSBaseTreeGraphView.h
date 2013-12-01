@@ -286,4 +286,7 @@ typedef enum PSTreeGraphOrientationStyle : NSUInteger {
 - (IBAction) moveLeft:(id)sender;
 - (IBAction) moveRight:(id)sender;
 
+- (void) refresh;
+
+
 @end

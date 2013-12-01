@@ -527,6 +527,26 @@
     } // Drain the pool
 }
 
+- (void) refresh
+{
+    PSBaseSubtreeView *rootSubtreeView = [self rootSubtreeView];
+    [rootSubtreeView removeFromSuperview];
+    [modelNodeToSubtreeViewMapTable_ removeAllObjects];
+    // Discard any previous selection.
+    [self setSelectedModelNodes:[NSSet set]];
+    
+    
+    [self buildGraph];
+    [self setNeedsDisplay];
+    [[self rootSubtreeView] resursiveSetSubtreeBordersNeedDisplay];
+    [self layoutGraphIfNeeded];
+    // Start with modelRoot selected.
+    if ( modelRoot_ ) {
+        [self setSelectedModelNodes:[NSSet setWithObject:modelRoot_]];
+        [self scrollSelectedModelNodesToVisibleAnimated:NO];
+    }
+}
+
 
 #pragma mark - Layout
 
